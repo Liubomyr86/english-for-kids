@@ -1,0 +1,15 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  // overflow: hidden;
+  @extend %font-main;
+  @include font(1.4rem, 2rem);
+  color: $color-main-text;
+}
+
+h1 {
+  @include font(2.6rem, 1.6rem, 500);
+  color: $color-main-text;
+}

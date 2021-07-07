@@ -1,0 +1,40 @@
+@import './basic-scss/normalize';
+@import './basic-scss/fonts';
+@import './basic-scss/const';
+@import './basic-scss/mixins';
+@import './basic-scss/wrappers';
+@import './basic-scss/base';
+@import './basic-scss/buttons';
+@import './basic-scss/header';
+
+#root {
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active {
+  text-decoration: underline;
+  cursor: default;
+}
+.main {
+  margin-top: 50px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-right: 20px;
+}

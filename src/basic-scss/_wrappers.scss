@@ -1,0 +1,29 @@
+@import './mixins';
+
+.container {
+  width: 1480px;
+  margin: 0 auto;
+  padding: 50px 0;
+
+  @include media-max-1479 {
+    width: 1110px;
+  }
+  @include media-max-1372 {
+    width: 1020px;
+  }
+  @include media-max-1060 {
+    width: 870px;
+  }
+  @include media-max-910 {
+    width: 726px;
+  }
+  @include media-max-768 {
+    width: 600px;
+  }
+  @include media-max-640 {
+    width: 384px;
+  }
+  @include media-max-424 {
+    width: 280px;
+  }
+}

@@ -1,0 +1,100 @@
+@import '../../basic-scss/fonts';
+@import '../../basic-scss/const';
+@import '../../basic-scss/mixins';
+
+.card-wrap {
+  width: 300px;
+  height: 280px;
+  margin: 15px 20px;
+  border-radius: 6px;
+  transition: 0.3s;
+  position: relative;
+
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  &:hover {
+    box-shadow: 0 10px 20px rgb(0 0 0 / 40%);
+  }
+
+  @include media-max-1372 {
+    width: 300px;
+  }
+  @include media-max-1060 {
+    width: 250px;
+  }
+  @include media-max-910 {
+    width: 218px;
+    margin: 10px 12px;
+  }
+  @include media-max-768 {
+    width: 176px;
+  }
+  @include media-max-640 {
+    width: 168px;
+  }
+  @include media-max-424 {
+    width: 256px;
+  }
+}
+
+// .card {
+//   border-radius: 6px;
+//   border: 2px solid #8ca39c;
+//   padding-top: 0.2px;
+// }
+
+.card-top {
+  background: $color-main-gradient;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 0px 15px;
+  border-radius: 4px;
+
+  &.orange {
+    background: $color-play-gradient;
+  }
+
+  @include media-max-1060 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+}
+
+.card__img-wrap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  padding: 10px;
+  background: $color-main-light;
+
+  @include media-max-1060 {
+    width: 140px;
+    height: 140px;
+  }
+  @include media-max-910 {
+    width: 120px;
+    height: 120px;
+  }
+}
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.card-bottom {
+  padding-bottom: 25px;
+  text-align: center;
+
+  @include media-max-1060 {
+    padding-bottom: 15px;
+  }
+}
+.card__title {
+  @include media-max-1060 {
+    @include font(2.2rem, 2.2rem, 500);
+  }
+  @include media-max-910 {
+    @include font(2rem, 2rem, 500);
+  }
+}

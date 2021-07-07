@@ -1,0 +1,47 @@
+%font-main {
+  font-family: "Roboto", sans-serif;
+}
+
+@mixin font($size, $line-height: $size, $weight: normal) {
+  font-size: $size;
+  line-height: $line-height;
+  font-weight: $weight;
+}
+
+@mixin media-max-1479 {
+  @media (max-width: 1479px) {
+    @content;
+  }
+}
+
+@mixin media-max-1372 {
+  @media (max-width: 1372px) {
+    @content;
+  }
+}
+
+@mixin media-max-1060 {
+  @media (max-width: 1060px) {
+    @content;
+  }
+}
+@mixin media-max-910 {
+  @media (max-width: 910px) {
+    @content;
+  }
+}
+@mixin media-max-768 {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin media-max-640 {
+  @media (max-width: 640px) {
+    @content;
+  }
+}
+@mixin media-max-424 {
+  @media (max-width: 424px) {
+    @content;
+  }
+}
