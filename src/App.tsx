@@ -12,66 +12,118 @@ import Button from './components/button/Button';
 
 import cards from './data/cardsCategory';
 import {useTypedSelector} from './hooks/useTypedSelector';
+import {Footer} from './components/footer/Footer';
+import {Modal} from './components/modal/Modal';
 
 const App: React.FC = () => {
+  const INACTIV_CLASS = 'inactive';
+  const CORRECT_SOUND = '../assets/correct.mp3';
+  const LOSE_SOUND = '../assets/lose.mp3';
+  const SUCCESS_SOUND = '../assets/success.mp3';
+  const ERROR_SOUND = '../assets/error.mp3';
+
   const [menuActive, setMenuActive] = useState(false);
   const [activeCardsCategory, setCardsCategory] = useState([]);
-  const [speakWord, setSpeakWord] = useState('');
+  const [bufferCardsCategory, setBufferCategory] = useState([]);
+  const [answersArray, updateAnswersArray] = useState([]);
+  const [startGame, setGame] = useState(false);
+  const [curentWord, setCurentWord] = useState('');
+  const [playWord, setPlayWord] = useState('');
+  const [errorsArray, setErrorsArray] = useState([]);
+  const [endGame, setEndGame] = useState(false);
+  const [winnerOrLoser, setWinnerOrLoser] = useState(false);
 
   const showMenu = () => setMenuActive(!menuActive);
-  // const showMenuThrottled = throttle(setMenuActive(!menuActive), 1000);
+  const startPlay = () => setGame(true);
 
   const dispatch = useDispatch();
   const mode = useTypedSelector((state) => state.mode.actionMode);
   const changeMode = () => {
     dispatch({type: 'isPlay'});
+    setGame(false);
+    setBufferCategory(activeCardsCategory);
+    updateAnswersArray([]);
+    setErrorsArray([]);
   };
 
-  // const location = useLocation();
-  // console.log(location.pathname);
-  console.log(activeCardsCategory);
-  console.log(speakWord);
-  // const category = useTypedSelector(state => state.category.playCategory);
-  // const addCategory = () => {
-  //   dispatch({type:'ADD_CATEGORY', payload: cards})
+  const locationPath = window.location.pathname !== '/';
 
-  // }
-  // console.log(category);
-  // const locationPath = locat.pathname !== '/';
+  const playAudio = (src: string) => {
+    const audio = new Audio();
+    audio.src = src;
+    audio.currentTime = 0;
+    audio.play();
+  };
+
+  const reaplay = () => {
+    playAudio(playWord);
+  };
+
+  const answers = (result) => {
+    const curentAnswer = [...answersArray];
+    curentAnswer.push(result);
+    updateAnswersArray(curentAnswer);
+  };
+
+  const errors = (result) => {
+    const curentError = [...errorsArray];
+    curentError.push(result);
+    setErrorsArray(curentError);
+  };
 
   const initGame = () => {
-    const playAudio = (src: string) => {
-      const audio = new Audio();
-      audio.src = src;
-      audio.currentTime = 0;
-      audio.play();
-    };
-
-    const curentCards = [...activeCardsCategory];
-    const shuffledCards: any = curentCards.sort(() => Math.random() - 0.5);
-
-    // console.log(shuffledCards)
-    const activeCard: any = shuffledCards.pop();
-
+    const curentCards = [...bufferCardsCategory];
+    const shuffledCards = curentCards.sort(() => Math.random() - 0.5);
+    const activeCard = shuffledCards.pop();
     const sound = activeCard.audioSrc;
     const {word} = activeCard;
     playAudio(sound);
-    // console.log(word);
-    setCardsCategory(shuffledCards);
-    // console.log(activeCardsCategory)
-    setSpeakWord(word);
-    // console.log(speakWord)
+    setBufferCategory(shuffledCards);
+    setPlayWord(sound);
+    setCurentWord(word);
   };
 
   const playGame = (event) => {
     const {target} = event;
+    const disabler = target.classList.contains(INACTIV_CLASS);
     const clickedWord = target.childNodes[0].innerHTML;
-    console.dir(event.target);
-    if (activeCardsCategory.length + 1 > 0) {
-      if (clickedWord === speakWord) {
-        target.style.opacity = '.5';
-        initGame();
+    if (startGame && mode && clickedWord === curentWord) {
+      if (bufferCardsCategory.length) {
+        target.classList.add(INACTIV_CLASS);
+        answers(true);
+        playAudio(CORRECT_SOUND);
+        setTimeout(() => {
+          initGame();
+        }, 1000);
+      } else if (errorsArray.length) {
+        target.classList.add(INACTIV_CLASS);
+        answers(true);
+        playAudio(CORRECT_SOUND);
+        setTimeout(() => {
+          playAudio(LOSE_SOUND);
+        }, 500);
+        setEndGame(true);
+        setWinnerOrLoser(false);
+        setTimeout(() => {
+          window.location.pathname = '/';
+        }, 3000);
+      } else {
+        target.classList.add(INACTIV_CLASS);
+        answers(true);
+        playAudio(CORRECT_SOUND);
+        setTimeout(() => {
+          playAudio(SUCCESS_SOUND);
+        }, 500);
+        setEndGame(true);
+        setWinnerOrLoser(true);
+        setTimeout(() => {
+          window.location.pathname = '/';
+        }, 3000);
       }
+    } else if (!disabler && startGame && mode) {
+      errors('error');
+      answers(false);
+      playAudio(ERROR_SOUND);
     }
   };
   return (
@@ -84,7 +136,13 @@ const App: React.FC = () => {
             <Toggle changeMode={changeMode} />
           </header>
           <main className="main">
-            <div className="cards-container">
+            <Modal flag={endGame} winner={winnerOrLoser} count={errorsArray} />
+            <div className={endGame ? 'cards-container none' : 'cards-container'}>
+              <div className={mode ? 'score' : 'score none'}>
+                {answersArray.map((elem, index) => (
+                  <div key={index} className={elem ? 'star-succes' : 'star-error'} />
+                ))}
+              </div>
               <Switch>
                 <Route path="/" exact>
                   <CategoryCards cards={cards} mode={mode} />
@@ -95,16 +153,23 @@ const App: React.FC = () => {
                       cards={card.cards}
                       mode={mode}
                       addCategory={setCardsCategory}
-                      activeCards={activeCardsCategory}
+                      addBufferCategory={setBufferCategory}
                       clickElement={playGame}
                     />
                   </Route>
                 ))}
               </Switch>
-              {/* {locationPath && mode && <Button playGame={initGame} />} */}
-              {mode && <Button playGame={initGame} />}
+              {locationPath && mode && (
+                <Button
+                  playGame={initGame}
+                  startPlay={startPlay}
+                  active={startGame}
+                  reaplay={reaplay}
+                />
+              )}
             </div>
           </main>
+          <Footer />
         </div>
       </Router>
     </>

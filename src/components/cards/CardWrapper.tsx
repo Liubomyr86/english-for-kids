@@ -3,10 +3,11 @@ import React, {useEffect} from 'react';
 // import {useTypedSelector} from '../../hooks/useTypedSelector';
 import Cards from './Cards';
 
-const CardWrapper = ({cards, mode, addCategory, activeCards, clickElement}) => {
+const CardWrapper = ({cards, mode, addCategory, addBufferCategory, clickElement}) => {
   // console.log(cards);
   useEffect(() => {
     addCategory(cards);
+    addBufferCategory(cards);
   }, []);
 
   // console.log(asd);

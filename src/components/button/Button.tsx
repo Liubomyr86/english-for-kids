@@ -1,12 +1,20 @@
 import React from 'react';
-import {useLocation} from 'react-router-dom';
 import './Button.scss';
 
-const Button = ({playGame}) => {
-  // const locat = useLocation();
+const Button = ({playGame, startPlay, active, reaplay}) => {
   return (
-    <div className="button-wrapper">
-      <button className="button" onClick={() => playGame()} type="button">
+    <div
+      className="button-wrapper"
+      onClick={
+        active
+          ? () => reaplay()
+          : () => {
+            setTimeout(() => {
+              playGame();
+            }, 500);
+          }
+      }>
+      <button className={active ? 'button repeat' : 'button'} onClick={startPlay} type="button">
         Start game
       </button>
     </div>

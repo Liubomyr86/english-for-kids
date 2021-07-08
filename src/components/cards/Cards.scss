@@ -43,6 +43,9 @@
       background-size: cover;
       background-position: 50%;
     }
+    &.inactive {
+      opacity: 0.5;
+    }
   }
 
   &__back {
