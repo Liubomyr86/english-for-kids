@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.scss';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect, useHistory} from 'react-router-dom';
 // import throttle from 'lodash.throttle';
 import {useDispatch} from 'react-redux';
 import Menu from './components/menu/Menu';
@@ -14,6 +14,12 @@ import cards from './data/cardsCategory';
 import {useTypedSelector} from './hooks/useTypedSelector';
 import {Footer} from './components/footer/Footer';
 import {Modal} from './components/modal/Modal';
+import StatisticPage from './components/statistic/Statistic';
+import {
+  getWord,
+  addCorrectClickToCount,
+  addWrongClickToCount,
+} from './local-storage/local-storage-wrap';
 
 const App: React.FC = () => {
   const INACTIV_CLASS = 'inactive';
@@ -32,6 +38,7 @@ const App: React.FC = () => {
   const [errorsArray, setErrorsArray] = useState([]);
   const [endGame, setEndGame] = useState(false);
   const [winnerOrLoser, setWinnerOrLoser] = useState(false);
+  const [difficultWords, setDifficultWords] = useState([]);
 
   const showMenu = () => setMenuActive(!menuActive);
   const startPlay = () => setGame(true);
@@ -46,6 +53,16 @@ const App: React.FC = () => {
     setErrorsArray([]);
   };
 
+  const changeMenuItem = () => {
+    // dispatch({type: 'isPlay'});
+    setGame(false);
+    setBufferCategory(activeCardsCategory);
+    updateAnswersArray([]);
+    setErrorsArray([]);
+  };
+
+  const history = useHistory();
+  console.log(history)
   const locationPath = window.location.pathname !== '/';
 
   const playAudio = (src: string) => {
@@ -88,6 +105,7 @@ const App: React.FC = () => {
     const disabler = target.classList.contains(INACTIV_CLASS);
     const clickedWord = target.childNodes[0].innerHTML;
     if (startGame && mode && clickedWord === curentWord) {
+      addCorrectClickToCount(getWord(event));
       if (bufferCardsCategory.length) {
         target.classList.add(INACTIV_CLASS);
         answers(true);
@@ -105,7 +123,8 @@ const App: React.FC = () => {
         setEndGame(true);
         setWinnerOrLoser(false);
         setTimeout(() => {
-          window.location.pathname = '/';
+          // window.location.href = '/';
+          <Redirect to='/'/>;
         }, 3000);
       } else {
         target.classList.add(INACTIV_CLASS);
@@ -117,10 +136,12 @@ const App: React.FC = () => {
         setEndGame(true);
         setWinnerOrLoser(true);
         setTimeout(() => {
-          window.location.pathname = '/';
+          // window.location.href = '/';
+        <Redirect to='/'/>;
         }, 3000);
       }
     } else if (!disabler && startGame && mode) {
+      addWrongClickToCount(getWord(event));
       errors('error');
       answers(false);
       playAudio(ERROR_SOUND);
@@ -132,7 +153,13 @@ const App: React.FC = () => {
         <div className="container">
           <header className="header">
             <HamburgerButton showMenu={showMenu} active={menuActive} />
-            <Menu active={menuActive} items={cards} showMenu={showMenu} mode={mode} />
+            <Menu
+              active={menuActive}
+              items={cards}
+              showMenu={showMenu}
+              mode={mode}
+              changeMode={changeMenuItem}
+            />
             <Toggle changeMode={changeMode} />
           </header>
           <main className="main">
@@ -158,6 +185,18 @@ const App: React.FC = () => {
                     />
                   </Route>
                 ))}
+                <Route path="/stats">
+                  <StatisticPage setDifficultWords={setDifficultWords} />
+                </Route>
+                <Route path="/repeat">
+                  <CardWrapper
+                    cards={difficultWords}
+                    mode={mode}
+                    addCategory={setCardsCategory}
+                    addBufferCategory={setBufferCategory}
+                    clickElement={playGame}
+                  />
+                </Route>
               </Switch>
               {locationPath && mode && (
                 <Button

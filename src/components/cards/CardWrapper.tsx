@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react';
-// import {useDispatch} from 'react-redux';
-// import {useTypedSelector} from '../../hooks/useTypedSelector';
 import Cards from './Cards';
 
 const CardWrapper = ({cards, mode, addCategory, addBufferCategory, clickElement}) => {
@@ -10,13 +8,6 @@ const CardWrapper = ({cards, mode, addCategory, addBufferCategory, clickElement}
     addBufferCategory(cards);
   }, []);
 
-  // console.log(asd);
-  // const dispatch = useDispatch();
-  // const category = useTypedSelector((state) => state.category.playCategory);
-  // const addCategory = () => {
-  //   dispatch({type: 'ADD_CATEGORY', payload: asd});
-  // };
-  // console.log(category);
   return (
     <>
       {cards.map((card) => (

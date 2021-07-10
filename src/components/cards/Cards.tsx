@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {getWord, addTrainModeClickToCount} from '../../local-storage/local-storage-wrap';
 import './Cards.scss';
 
 const Cards = ({image, sound, word, id, translation, mode, playGame}) => {
@@ -30,9 +31,13 @@ const Cards = ({image, sound, word, id, translation, mode, playGame}) => {
         onClick={(event) => playGame(event)}>
         <div
           className={mode ? 'card__front cover' : 'card__front'}
+          id={word}
           style={{backgroundImage: `url('${image}')`}}
           onClick={(event) => {
-            if (!mode) playAudio(event, sound);
+            if (!mode) {
+              playAudio(event, sound);
+              addTrainModeClickToCount(getWord(event));
+            }
           }}>
           <h2 className={mode ? 'card-title none' : 'card-title'}>{word}</h2>
         </div>

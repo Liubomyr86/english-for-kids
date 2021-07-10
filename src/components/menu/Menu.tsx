@@ -2,7 +2,7 @@ import React from 'react';
 import './Menu.scss';
 import {NavLink} from 'react-router-dom';
 
-const Menu = ({items, active, showMenu, mode}): JSX.Element => {
+const Menu = ({items, active, showMenu, mode, changeMode}): JSX.Element => {
   const stopPropagination = (event) => event.stopPropagation();
 
   return (
@@ -14,18 +14,20 @@ const Menu = ({items, active, showMenu, mode}): JSX.Element => {
           onClick={stopPropagination}>
           <ul className="menu-items" onClick={showMenu}>
             <li className="menu-item">
-              <NavLink to="/" exact>
+              <NavLink to="/" exact onClick={changeMode}>
                 Main Page
               </NavLink>
             </li>
             {items.map((item) => (
-              <li key={item.id} className="menu-item">
+              <li key={item.id} className="menu-item" onClick={changeMode}>
                 <NavLink to={item.path}>{item.title}</NavLink>
               </li>
             ))}
-            {/* <li className="menu-item">
-              <Link to="/stats">Statistics</Link>
-            </li> */}
+            <li className="menu-item">
+              <NavLink to="/stats" onClick={changeMode}>
+                Statistics
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
