@@ -1,5 +1,5 @@
 %font-main {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 @mixin font($size, $line-height: $size, $weight: normal) {
@@ -40,8 +40,13 @@
     @content;
   }
 }
-@mixin media-max-424 {
-  @media (max-width: 424px) {
+@mixin media-max-540 {
+  @media (max-width: 540px) {
+    @content;
+  }
+}
+@mixin media-max-440 {
+  @media (max-width: 440px) {
     @content;
   }
 }

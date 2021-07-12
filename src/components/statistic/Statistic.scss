@@ -3,9 +3,9 @@
 @import '../../basic-scss/mixins';
 
 .statistic-page-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
 }
 
 .table-btn {
@@ -42,10 +42,11 @@
 }
 
 .statistic-table-wrap {
-  margin: 20px;
-  @include media-max-640 {
-    overflow-x: scroll;
-  }
+  margin: 20px 0;
+  overflow: auto;
+  // @include media-max-640 {
+  //   overflow-x: scroll;
+  // }
 }
 .statistic-table {
   color: $color-main-light;
@@ -61,80 +62,80 @@
 .table-caption {
   background: $color-gradient-play-mode;
 
-  th {
-    @include font(2.8rem, 2.8rem, 500);
-    width: 100px;
-    padding: 15px 5px;
+  // th {
+  //   @include font(2.8rem, 2.8rem, 500);
+  //   width: 100px;
+  //   padding: 15px 5px;
 
-    &:nth-child(1),
-    &:nth-child(2),
-    &:nth-child(3) {
-      width: 200px;
-    }
-    &:nth-child(1),
-    &:nth-child(2) {
-      padding-left: 10px;
-    }
-  }
-  @include media-max-1372 {
-    th {
-      @include font(2rem, 2rem, 500);
-      width: 70px;
-      padding: 10px 5px;
+  //   &:nth-child(1),
+  //   &:nth-child(2),
+  //   &:nth-child(3) {
+  //     width: 200px;
+  //   }
+  //   &:nth-child(1),
+  //   &:nth-child(2) {
+  //     padding-left: 10px;
+  //   }
+  // }
+  // @include media-max-1372 {
+  //   th {
+  //     @include font(2rem, 2rem, 500);
+  //     width: 70px;
+  //     padding: 10px 5px;
 
-      &:nth-child(1),
-      &:nth-child(2),
-      &:nth-child(3) {
-        width: 150px;
-      }
-      &:nth-child(1),
-      &:nth-child(2) {
-        padding-left: 6px;
-      }
-    }
-  }
-  @include media-max-768 {
-    th {
-      @include font(1.6rem, 1.6rem, 400);
-      width: 50px;
-      padding: 7px 3px;
+  //     &:nth-child(1),
+  //     &:nth-child(2),
+  //     &:nth-child(3) {
+  //       width: 150px;
+  //     }
+  //     &:nth-child(1),
+  //     &:nth-child(2) {
+  //       padding-left: 6px;
+  //     }
+  //   }
+  // }
+  // @include media-max-768 {
+  //   th {
+  //     @include font(1.6rem, 1.6rem, 400);
+  //     width: 50px;
+  //     padding: 7px 3px;
 
-      &:nth-child(1),
-      &:nth-child(2),
-      &:nth-child(3) {
-        width: 120px;
-      }
-      &:nth-child(1),
-      &:nth-child(2) {
-        padding-left: 3px;
-      }
-    }
-  }
+  //     &:nth-child(1),
+  //     &:nth-child(2),
+  //     &:nth-child(3) {
+  //       width: 120px;
+  //     }
+  //     &:nth-child(1),
+  //     &:nth-child(2) {
+  //       padding-left: 3px;
+  //     }
+  //   }
+  // }
 }
 
 .table-body {
   // background: $color-gradient;
   color: black;
 
-  td {
-    @include font(2.2rem, 2.2rem);
-    padding: 8px 5px;
+  // td {
+  //   @include font(2.2rem, 2.2rem);
+  //   padding: 8px 5px;
 
-    &:nth-child(1),
-    &:nth-child(2) {
-      padding-left: 10px;
-    }
-  }
-  @include media-max-1372 {
-    td {
-      @include font(1.5rem, 1.5rem);
-    }
-  }
-  @include media-max-1372 {
-    td {
-      @include font(1.3rem, 1.3rem);
-    }
-  }
+  //   &:nth-child(1),
+  //   &:nth-child(2) {
+  //     padding-left: 10px;
+  //   }
+  // }
+  // @include media-max-1372 {
+  //   td {
+  //     @include font(1.5rem, 1.5rem);
+  //   }
+  // }
+  // @include media-max-1372 {
+  //   td {
+  //     @include font(1.3rem, 1.3rem);
+  //   }
+  // }
 }
 .centered {
   text-align: center !important;

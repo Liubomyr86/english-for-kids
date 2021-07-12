@@ -15,7 +15,11 @@ export const Modal = ({flag, winner, count}) => {
     <>
       <div className={flag ? 'modal-wrapper' : 'none'}>
         <p className="modal-title">{winner ? TRUE_TITLE : FALSE_TITLE}</p>
-        <img src={winner ? TRUE_IMAGE : FALSE_IMAGE} alt="" className="modal-img" />
+        <img
+          src={winner ? TRUE_IMAGE : FALSE_IMAGE}
+          alt=""
+          className={flag ? 'modal-img' : 'none'}
+        />
         <p className="error-count">{winner ? '' : `Errors: ${count.length}`}</p>
       </div>
     </>

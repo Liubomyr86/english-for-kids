@@ -1,3 +1,7 @@
+@import '../../basic-scss/fonts';
+@import '../../basic-scss/const';
+@import '../../basic-scss/mixins';
+
 .modal-wrapper {
   display: flex;
   justify-content: center;
@@ -9,16 +13,72 @@
   font-size: 60px;
   line-height: 80px;
   margin: 20px 0;
+  @include media-max-768 {
+    font-size: 40px;
+    line-height: 60px;
+    margin: 15px 0;
+  }
+  @include media-max-640 {
+    font-size: 30px;
+    line-height: 45px;
+    margin: 10px 0;
+  }
+  @include media-max-540 {
+    font-size: 25px;
+    line-height: 35px;
+    margin: 10px 0;
+  }
+  @include media-max-440 {
+    font-size: 15px;
+    line-height: 20px;
+    margin: 5px 0;
+  }
 }
 
 .modal-img {
   margin: 10px;
+  @include media-max-768 {
+    width: 440px;
+    height: 352px;
+  }
+  @include media-max-640 {
+    width: 352px;
+    height: 264px;
+  }
+  @include media-max-540 {
+    width: 308px;
+    height: 220px;
+  }
+  @include media-max-440 {
+    width: 220px;
+    height: 132px;
+  }
 }
 
 .error-count {
   font-size: 40px;
   line-height: 60px;
   margin: 20px 0;
+  @include media-max-768 {
+    font-size: 30px;
+    line-height: 45px;
+    margin: 15px 0;
+  }
+  @include media-max-640 {
+    font-size: 25px;
+    line-height: 35px;
+    margin: 10px 0;
+  }
+  @include media-max-540 {
+    font-size: 15px;
+    line-height: 20px;
+    margin: 5px 0;
+  }
+  @include media-max-440 {
+    font-size: 10px;
+    line-height: 20px;
+    margin: 5px 0;
+  }
 }
 
 .none {

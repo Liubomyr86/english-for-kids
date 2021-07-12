@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.scss';
-import {BrowserRouter as Router, Switch, Route, Redirect, useHistory} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, useHistory} from 'react-router-dom';
 // import throttle from 'lodash.throttle';
 import {useDispatch} from 'react-redux';
 import Menu from './components/menu/Menu';
@@ -62,8 +62,8 @@ const App: React.FC = () => {
   };
 
   const history = useHistory();
-  console.log(history)
-  const locationPath = window.location.pathname !== '/';
+  console.log(history);
+  const locationPath = window.location.pathname !== '/' && window.location.pathname !== '/stats';
 
   const playAudio = (src: string) => {
     const audio = new Audio();
@@ -123,8 +123,8 @@ const App: React.FC = () => {
         setEndGame(true);
         setWinnerOrLoser(false);
         setTimeout(() => {
-          // window.location.href = '/';
-          <Redirect to='/'/>;
+          window.location.href = '/';
+          // <Redirect to='/'/>;
         }, 3000);
       } else {
         target.classList.add(INACTIV_CLASS);
@@ -136,8 +136,8 @@ const App: React.FC = () => {
         setEndGame(true);
         setWinnerOrLoser(true);
         setTimeout(() => {
-          // window.location.href = '/';
-        <Redirect to='/'/>;
+          window.location.href = '/';
+          // <Redirect to='/'/>;
         }, 3000);
       }
     } else if (!disabler && startGame && mode) {

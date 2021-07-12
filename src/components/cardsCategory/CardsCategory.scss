@@ -54,10 +54,10 @@
     background: $color-play-gradient;
   }
 
-  @include media-max-1060 {
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
+  // @include media-max-1060 {
+  //   padding-top: 20px;
+  //   padding-bottom: 10px;
+  // }
 }
 
 .card__img-wrap {
@@ -67,14 +67,14 @@
   padding: 10px;
   background: $color-main-light;
 
-  @include media-max-1060 {
-    width: 140px;
-    height: 140px;
-  }
-  @include media-max-910 {
-    width: 120px;
-    height: 120px;
-  }
+  // @include media-max-1060 {
+  //   width: 140px;
+  //   height: 140px;
+  // }
+  // @include media-max-910 {
+  //   width: 120px;
+  //   height: 120px;
+  // }
 }
 .img {
   width: 100%;
@@ -86,15 +86,15 @@
   padding-bottom: 25px;
   text-align: center;
 
-  @include media-max-1060 {
-    padding-bottom: 15px;
-  }
+  // @include media-max-1060 {
+  //   padding-bottom: 15px;
+  // }
 }
-.card__title {
-  @include media-max-1060 {
-    @include font(2.2rem, 2.2rem, 500);
-  }
-  @include media-max-910 {
-    @include font(2rem, 2rem, 500);
-  }
-}
+// .card__title {
+//   @include media-max-1060 {
+//     @include font(2.2rem, 2.2rem, 500);
+//   }
+//   @include media-max-910 {
+//     @include font(2rem, 2rem, 500);
+//   }
+// }
